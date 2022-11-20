@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td>Maximum Supply</td>
-<td>100 000 000 crysh</td>
+<td>100 000 000 WVR</td>
 </tr>
 <tr>
 <td>Minimum Stake Age</td>
