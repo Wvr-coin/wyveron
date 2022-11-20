@@ -1,0 +1,8 @@
+/usr/bin/wvr-cli		--	gen_context(system_u:object_r:wvr_exec_t,s0)
+/usr/sbin/wvrd		--	gen_context(system_u:object_r:wvr_exec_t,s0)
+/usr/lib(64)?/wvr/wvrd		--	gen_context(system_u:object_r:wvr_exec_t,s0)
+
+/etc/wvr(/.*)?		gen_context(system_u:object_r:wvr_conf_t,s0)
+/var/lib/wvr(/.*)?		gen_context(system_u:object_r:wvr_var_lib_t,s0)
+
+(/var)?/run/wvrd(/.*)?   gen_context(system_u:object_r:wvr_var_run_t,s0)

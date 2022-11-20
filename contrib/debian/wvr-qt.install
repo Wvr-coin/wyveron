@@ -1,0 +1,6 @@
+usr/local/bin/wvr-qt usr/bin
+share/pixmaps/wvr32.xpm usr/share/pixmaps
+share/pixmaps/wvr16.xpm usr/share/pixmaps
+share/pixmaps/wvr128.png usr/share/pixmaps
+debian/wvr-qt.desktop usr/share/applications
+debian/wvr-qt.protocol usr/share/kde4/services/

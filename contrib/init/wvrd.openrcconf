@@ -1,0 +1,33 @@
+# /etc/conf.d/wvrd: config file for /etc/init.d/wvrd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/wvr/wvr.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/wvrd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/wvrd.pid"
+
+# Where to write wvrd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/wvrd"
+
+# User and group to own wvrd process
+#BITCOIND_USER="wvr"
+#BITCOIND_GROUP="wvr"
+
+# Path to wvrd executable
+#BITCOIND_BIN="/usr/bin/wvrd"
+
+# Nice value to run wvrd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

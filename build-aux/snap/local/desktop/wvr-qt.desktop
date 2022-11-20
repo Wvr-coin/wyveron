@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=wvr Coin
+Comment=wvr Coin QT main network
+GenericName=wvr Digital Currency QT client main network
+Exec=wvr-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/wvr.png
+MimeType=x-scheme-handler/wvr;
+Categories=X-Office;X-Finance;
+Keywords=internet;wvr;zwvr;wvr;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

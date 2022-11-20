@@ -1,0 +1,3 @@
+usr/local/bin/wvrd usr/bin
+usr/local/bin/wvr-cli usr/bin
+debian/examples/wvr.conf etc/wvr

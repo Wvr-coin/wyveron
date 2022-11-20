@@ -1,0 +1,851 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/wvr-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# wvr qt core #
+QT_TS = \
+  qt/locale/wvr_bg.ts \
+  qt/locale/wvr_ca.ts \
+  qt/locale/wvr_cs.ts \
+  qt/locale/wvr_da.ts \
+  qt/locale/wvr_de.ts \
+  qt/locale/wvr_en.ts \
+  qt/locale/wvr_en_GB.ts \
+  qt/locale/wvr_en_US.ts \
+  qt/locale/wvr_eo.ts \
+  qt/locale/wvr_es.ts \
+  qt/locale/wvr_es_ES.ts \
+  qt/locale/wvr_fi.ts \
+  qt/locale/wvr_fr_FR.ts \
+  qt/locale/wvr_hi_IN.ts \
+  qt/locale/wvr_hr.ts \
+  qt/locale/wvr_hr_HR.ts \
+  qt/locale/wvr_it.ts \
+  qt/locale/wvr_ja.ts \
+  qt/locale/wvr_ko_KR.ts \
+  qt/locale/wvr_lt_LT.ts \
+  qt/locale/wvr_nl.ts \
+  qt/locale/wvr_pl.ts \
+  qt/locale/wvr_pt.ts \
+  qt/locale/wvr_pt_BR.ts \
+  qt/locale/wvr_ro_RO.ts \
+  qt/locale/wvr_ru.ts \
+  qt/locale/wvr_sk.ts \
+  qt/locale/wvr_sv.ts \
+  qt/locale/wvr_tr.ts \
+  qt/locale/wvr_uk.ts \
+  qt/locale/wvr_vi.ts \
+  qt/locale/wvr_zh_CN.ts \
+  qt/locale/wvr_zh_TW.ts
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/governancepage.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/wvr/forms/loadingdialog.ui \
+  qt/forms/zwvrcontroldialog.ui \
+  qt/wvr/forms/snackbar.ui \
+  qt/wvr/forms/navmenuwidget.ui \
+  qt/wvr/forms/lockunlock.ui \
+  qt/wvr/forms/expandablebutton.ui \
+  qt/wvr/forms/receivedialog.ui \
+  qt/wvr/forms/walletpassworddialog.ui \
+  qt/wvr/forms/topbar.ui \
+  qt/wvr/forms/txrow.ui \
+  qt/wvr/forms/dashboardwidget.ui \
+  qt/wvr/forms/coincontrolwvrwidget.ui \
+  qt/wvr/forms/addresslabelrow.ui \
+  qt/wvr/forms/contactdropdownrow.ui \
+  qt/wvr/forms/mninfodialog.ui \
+  qt/wvr/forms/optionbutton.ui \
+  qt/wvr/forms/masternodewizarddialog.ui \
+  qt/wvr/forms/mnrow.ui \
+  qt/wvr/forms/masternodeswidget.ui \
+  qt/wvr/forms/myaddressrow.ui \
+  qt/wvr/forms/csrow.ui \
+  qt/wvr/forms/sendchangeaddressdialog.ui \
+  qt/wvr/forms/sendconfirmdialog.ui \
+  qt/wvr/forms/sendcustomfeedialog.ui \
+  qt/wvr/forms/sendchangeaddressdialog.ui \
+  qt/wvr/forms/sendmultirow.ui \
+  qt/wvr/forms/send.ui \
+  qt/wvr/forms/addnewaddressdialog.ui \
+  qt/wvr/forms/addnewcontactdialog.ui \
+  qt/wvr/forms/requestdialog.ui \
+  qt/wvr/forms/receivewidget.ui \
+  qt/wvr/forms/tooltipmenu.ui \
+  qt/wvr/forms/addresseswidget.ui \
+  qt/wvr/forms/defaultdialog.ui \
+  qt/wvr/forms/denomgenerationdialog.ui \
+  qt/wvr/forms/privacywidget.ui \
+  qt/wvr/forms/coldstakingwidget.ui \
+  qt/wvr/settings/forms/settingsbackupwallet.ui \
+  qt/wvr/settings/forms/settingsbittoolwidget.ui \
+  qt/wvr/settings/forms/settingsconsolewidget.ui \
+  qt/wvr/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/wvr/settings/forms/settingsfaqwidget.ui \
+  qt/wvr/settings/forms/settingsinformationwidget.ui \
+  qt/wvr/settings/forms/settingsmainoptionswidget.ui \
+  qt/wvr/settings/forms/settingsmultisenddialog.ui \
+  qt/wvr/settings/forms/settingsmultisendwidget.ui \
+  qt/wvr/settings/forms/settingssignmessagewidgets.ui \
+  qt/wvr/settings/forms/settingswalletoptionswidget.ui \
+  qt/wvr/settings/forms/settingswalletrepairwidget.ui \
+  qt/wvr/settings/forms/settingswidget.ui \
+  qt/wvr/forms/welcomecontentwidget.ui \
+  qt/wvr/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/wvr/moc_wvrgui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_blockexplorer.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_governancepage.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_proposalframe.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/wvr/moc_loadingdialog.cpp \
+  qt/moc_zwvrcontroldialog.cpp \
+  qt/wvr/moc_pwidget.cpp \
+  qt/wvr/moc_snackbar.cpp \
+  qt/wvr/moc_navmenuwidget.cpp \
+  qt/wvr/moc_lockunlock.cpp \
+  qt/wvr/moc_expandablebutton.cpp \
+  qt/wvr/moc_furabstractlistitemdelegate.cpp \
+  qt/wvr/moc_receivedialog.cpp \
+  qt/wvr/moc_walletpassworddialog.cpp \
+  qt/wvr/moc_pfborderimage.cpp \
+  qt/wvr/moc_topbar.cpp \
+  qt/wvr/moc_txrow.cpp \
+  qt/wvr/moc_dashboardwidget.cpp \
+  qt/wvr/moc_coincontrolwvrwidget.cpp \
+  qt/wvr/moc_addresslabelrow.cpp \
+  qt/wvr/moc_contactdropdownrow.cpp \
+  qt/wvr/moc_mninfodialog.cpp \
+  qt/wvr/moc_optionbutton.cpp \
+  qt/wvr/moc_coldstakingmodel.cpp \
+  qt/wvr/moc_mnmodel.cpp \
+  qt/wvr/moc_masternodewizarddialog.cpp \
+  qt/wvr/moc_mnrow.cpp \
+  qt/wvr/moc_masternodeswidget.cpp \
+  qt/wvr/moc_myaddressrow.cpp \
+  qt/wvr/moc_csrow.cpp \
+  qt/wvr/moc_contactsdropdown.cpp \
+  qt/wvr/moc_sendchangeaddressdialog.cpp \
+  qt/wvr/moc_sendconfirmdialog.cpp \
+  qt/wvr/moc_sendcustomfeedialog.cpp \
+  qt/wvr/moc_sendchangeaddressdialog.cpp \
+  qt/wvr/moc_sendmultirow.cpp \
+  qt/wvr/moc_send.cpp \
+  qt/wvr/moc_addnewaddressdialog.cpp \
+  qt/wvr/moc_addnewcontactdialog.cpp \
+  qt/wvr/moc_requestdialog.cpp \
+  qt/wvr/moc_receivewidget.cpp \
+  qt/wvr/moc_tooltipmenu.cpp \
+  qt/wvr/moc_addresseswidget.cpp \
+  qt/wvr/moc_defaultdialog.cpp \
+  qt/wvr/moc_denomgenerationdialog.cpp \
+  qt/wvr/moc_privacywidget.cpp \
+  qt/wvr/moc_coldstakingwidget.cpp \
+  qt/wvr/settings/moc_settingsbackupwallet.cpp \
+  qt/wvr/settings/moc_settingsbittoolwidget.cpp \
+  qt/wvr/settings/moc_settingsconsolewidget.cpp \
+  qt/wvr/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/wvr/settings/moc_settingsfaqwidget.cpp \
+  qt/wvr/settings/moc_settingsinformationwidget.cpp \
+  qt/wvr/settings/moc_settingsmainoptionswidget.cpp \
+  qt/wvr/settings/moc_settingsmultisenddialog.cpp \
+  qt/wvr/settings/moc_settingsmultisendwidget.cpp \
+  qt/wvr/settings/moc_settingssignmessagewidgets.cpp \
+  qt/wvr/settings/moc_settingswalletoptionswidget.cpp \
+  qt/wvr/settings/moc_settingswalletrepairwidget.cpp \
+  qt/wvr/settings/moc_settingswidget.cpp \
+  qt/wvr/moc_welcomecontentwidget.cpp \
+  qt/wvr/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/wvr.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/wvr/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_wvr.cpp
+QT_QRC = qt/wvr.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_wvr_locale.cpp
+QT_QRC_LOCALE = qt/wvr_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/wvr/wvrgui.h \
+  qt/bitcoinunits.h \
+  qt/blockexplorer.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/governancepage.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/proposalframe.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/wvr/prunnable.h \
+  qt/wvr/pfborderimage.h \
+  qt/wvr/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/zwvrcontroldialog.h \
+  qt/wvr/pwidget.h \
+  qt/wvr/guitransactionsutils.h \
+  qt/wvr/snackbar.h \
+  qt/wvr/navmenuwidget.h \
+  qt/wvr/lockunlock.h \
+  qt/wvr/receivedialog.h \
+  qt/wvr/furlistrow.h \
+  qt/wvr/furabstractlistitemdelegate.h \
+  qt/wvr/txviewholder.h \
+  qt/wvr/qtutils.h \
+  qt/wvr/expandablebutton.h \
+  qt/wvr/walletpassworddialog.h \
+  qt/wvr/topbar.h \
+  qt/wvr/txrow.h \
+  qt/wvr/addressholder.h \
+  qt/wvr/addressfilterproxymodel.h \
+  qt/wvr/dashboardwidget.h \
+  qt/wvr/coincontrolwvrwidget.h \
+  qt/wvr/addresslabelrow.h \
+  qt/wvr/contactdropdownrow.h \
+  qt/wvr/mninfodialog.h \
+  qt/wvr/optionbutton.h \
+  qt/wvr/coldstakingmodel.h \
+  qt/wvr/mnmodel.h \
+  qt/wvr/masternodewizarddialog.h \
+  qt/wvr/mnrow.h \
+  qt/wvr/masternodeswidget.h \
+  qt/wvr/myaddressrow.h \
+  qt/wvr/csrow.h \
+  qt/wvr/contactsdropdown.h \
+  qt/wvr/sendchangeaddressdialog.h \
+  qt/wvr/sendconfirmdialog.h \
+  qt/wvr/sendcustomfeedialog.h \
+  qt/wvr/sendchangeaddressdialog.h \
+  qt/wvr/sendmultirow.h \
+  qt/wvr/send.h \
+  qt/wvr/addnewaddressdialog.h \
+  qt/wvr/addnewcontactdialog.h \
+  qt/wvr/requestdialog.h \
+  qt/wvr/receivewidget.h \
+  qt/wvr/tooltipmenu.h \
+  qt/wvr/addresseswidget.h \
+  qt/wvr/defaultdialog.h \
+  qt/wvr/denomgenerationdialog.h \
+  qt/wvr/privacywidget.h \
+  qt/wvr/coldstakingwidget.h \
+  qt/wvr/settings/settingsbackupwallet.h \
+  qt/wvr/settings/settingsbittoolwidget.h \
+  qt/wvr/settings/settingsconsolewidget.h \
+  qt/wvr/settings/settingsdisplayoptionswidget.h \
+  qt/wvr/settings/settingsfaqwidget.h \
+  qt/wvr/settings/settingsinformationwidget.h \
+  qt/wvr/settings/settingsmainoptionswidget.h \
+  qt/wvr/settings/settingsmultisenddialog.h \
+  qt/wvr/settings/settingsmultisendwidget.h \
+  qt/wvr/settings/settingssignmessagewidgets.h \
+  qt/wvr/settings/settingswalletoptionswidget.h \
+  qt/wvr/settings/settingswalletrepairwidget.h \
+  qt/wvr/settings/settingswidget.h \
+  qt/wvr/welcomecontentwidget.h \
+  qt/wvr/splash.h
+
+RES_ICONS = \
+  qt/res/icons/add.png \
+  qt/res/icons/address-book.png \
+  qt/res/icons/automint_active.png \
+  qt/res/icons/automint_inactive.png \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/onion.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/receive_dark.png \
+  qt/res/icons/privacy.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/send_dark.png \
+  qt/res/icons/governance.png \
+  qt/res/icons/governance_dark.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
+  qt/res/icons/transaction0.png \
+  qt/res/icons/transaction2.png \
+  qt/res/icons/transaction_conflicted.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/ic-transaction-received.png \
+  qt/res/icons/ic-transaction-mint.png \
+  qt/res/icons/ic-transaction-sent.png \
+  qt/res/icons/ic-transaction-staked.png \
+  qt/res/icons/unit_wvr.png \
+  qt/res/icons/unit_mwvr.png \
+  qt/res/icons/unit_uwvr.png \
+  qt/res/icons/unit_twvr.png \
+  qt/res/icons/unit_tmwvr.png \
+  qt/res/icons/unit_tuwvr.png \
+  qt/res/icons/yesvote.png \
+  qt/res/icons/novote.png \
+  qt/res/icons/abstainvote.png \
+  qt/wvr/res/img/bg-dashboard-banner.png \
+  qt/wvr/res/img/bg-multi-number-dark.png \
+  qt/wvr/res/img/ic-check-locked.png \
+  qt/wvr/res/img/ic-nav-address.png \
+  qt/wvr/res/img/ic-update.png \
+  qt/wvr/res/img/bg-multi-number.png \
+  qt/wvr/res/img/ic-check-mint-off.png \
+  qt/wvr/res/img/ic-nav-cold-staking.png \
+  qt/wvr/res/img/ic-nav-cold-staking-active.png \
+  qt/wvr/res/img/ic-nav-dashboard-active.png \
+  qt/wvr/res/img/ic-wallet-status-locked.png \
+  qt/wvr/res/img/bg-splash.png \
+  qt/wvr/res/img/bg-splash.png \
+  qt/wvr/res/img/ic-check-mint.png \
+  qt/wvr/res/img/ic-nav-dashboard-hover.png \
+  qt/wvr/res/img/ic-wallet-status-staking.png \
+  qt/wvr/res/img/ic-check-peers-off.png \
+  qt/wvr/res/img/ic-nav-dashboard.png \
+  qt/wvr/res/img/ic-wallet-status-unlocked.png \
+  qt/wvr/res/img/ic-check-peers.png \
+  qt/wvr/res/img/ic-nav-master-active.png \
+  qt/wvr/res/img/ic-watch-password-white.png \
+  qt/wvr/res/img/bg-welcome-container.png \
+  qt/wvr/res/img/ic-check-staking-off.png \
+  qt/wvr/res/img/ic-nav-master-hover.png \
+  qt/wvr/res/img/ic-watch-password.png \
+  qt/wvr/res/img/bg-welcome.png \
+  qt/wvr/res/img/ic-check-staking.png \
+  qt/wvr/res/img/ic-nav-master.png \
+  qt/wvr/res/img/btn-radio-active.png \
+  qt/wvr/res/img/ic-check-sync-off.png \
+  qt/wvr/res/img/ic-nav-privacy-active.png \
+  qt/wvr/res/img/img-empty-contacts.png \
+  qt/wvr/res/img/btn-radio-off.png \
+  qt/wvr/res/img/ic-check-sync.png \
+  qt/wvr/res/img/ic-nav-privacy-hover.png \
+  qt/wvr/res/img/img-empty-dark-contacts.png \
+  qt/wvr/res/img/ic-contact-arrow-down.png \
+  qt/wvr/res/img/ic-contact-arrow-down-white.png \
+  qt/wvr/res/img/ic-check-sync.png \
+  qt/wvr/res/img/ic-check-faq.png \
+  qt/wvr/res/img/ic-nav-privacy.png \
+  qt/wvr/res/img/img-empty-dark-error.png \
+  qt/wvr/res/img/ic-add-label.png \
+  qt/wvr/res/img/ic-pending.png \
+  qt/wvr/res/img/ic-check-theme-dark.png \
+  qt/wvr/res/img/ic-nav-receive-active.png \
+  qt/wvr/res/img/img-empty-dark-masternode.png \
+  qt/wvr/res/img/ic-add-liliac.png \
+  qt/wvr/res/img/ic-check-theme-light.png \
+  qt/wvr/res/img/ic-nav-receive-hover.png \
+  qt/wvr/res/img/img-empty-dark-multisend.png \
+  qt/wvr/res/img/ic-add-purple.png \
+  qt/wvr/res/img/ic-check-white.png \
+  qt/wvr/res/img/ic-nav-receive.png \
+  qt/wvr/res/img/img-empty-dark-peers.png \
+  qt/wvr/res/img/ic-add.png \
+  qt/wvr/res/img/ic-check.png \
+  qt/wvr/res/img/ic-nav-send-active.png \
+  qt/wvr/res/img/img-empty-dark-staking-off.png \
+  qt/wvr/res/img/img-empty-dark-staking-on.png \
+  qt/wvr/res/img/ic-address-book-grey.png \
+  qt/wvr/res/img/ic-chevron-left.png \
+  qt/wvr/res/img/ic-nav-send-hover.png \
+  qt/wvr/res/img/img-empty-dark-transactions.png \
+  qt/wvr/res/img/ic-address-book-white.png \
+  qt/wvr/res/img/ic-chevron-right.png \
+  qt/wvr/res/img/ic-nav-send.png \
+  qt/wvr/res/img/img-empty-error.png \
+  qt/wvr/res/img/ic-address-book.png \
+  qt/wvr/res/img/ic-clear-liliac.png \
+  qt/wvr/res/img/ic-nav-settings-active.png \
+  qt/wvr/res/img/img-empty-masternode.png \
+  qt/wvr/res/img/ic-address-send-white.png \
+  qt/wvr/res/img/ic-clear-purple.png \
+  qt/wvr/res/img/ic-nav-settings-hover.png \
+  qt/wvr/res/img/img-empty-multisend.png \
+  qt/wvr/res/img/ic-address-send.png \
+  qt/wvr/res/img/ic-close-white.png \
+  qt/wvr/res/img/ic-nav-settings.png \
+  qt/wvr/res/img/img-empty-peers.png \
+  qt/wvr/res/img/img-empty-privacy.png \
+  qt/wvr/res/img/img-empty-privacy-dark.png \
+  qt/wvr/res/img/ic-arrow-drop-down-white.png \
+  qt/wvr/res/img/ic-close.png \
+  qt/wvr/res/img/ic-radio-liliac-on.png \
+  qt/wvr/res/img/img-empty-staking-off.png \
+  qt/wvr/res/img/ic-arrow-drop-down.png \
+  qt/wvr/res/img/ic-coin-wvr.png \
+  qt/wvr/res/img/ic-receive-off.png \
+  qt/wvr/res/img/img-empty-staking-on.png \
+  qt/wvr/res/img/ic-arrow-drop-up-white.png \
+  qt/wvr/res/img/ic-coin-zwvr.png \
+  qt/wvr/res/img/ic-receive-on.png \
+  qt/wvr/res/img/img-empty-transactions.png \
+  qt/wvr/res/img/ic-arrow-drop-up.png \
+  qt/wvr/res/img/ic-coin-zwvr.png \
+  qt/wvr/res/img/ic-received.png \
+  qt/wvr/res/img/img-logo-wvr.png \
+  qt/wvr/res/img/ic-arrow-drop-white-down.png \
+  qt/wvr/res/img/ic-combo-box.png \
+  qt/wvr/res/img/ic-send.png \
+  qt/wvr/res/img/img-logo-wvr@2x.png \
+  qt/wvr/res/img/ic-arrow-purple-down.png \
+  qt/wvr/res/img/ic-connect.png \
+  qt/wvr/res/img/ic-submenu-lock.png \
+  qt/wvr/res/img/img-logo-wvr@3x.png \
+  qt/wvr/res/img/img-logo-wvr.png \
+  qt/wvr/res/img/ic-arrow-right-white.png \
+  qt/wvr/res/img/ic-arrow-left-white.png \
+  qt/wvr/res/img/ic-arrow-left.png \
+  qt/wvr/res/img/ic-copy-liliac.png \
+  qt/wvr/res/img/ic-submenu-staking.png \
+  qt/wvr/res/img/img-nav-logo-wvr.png \
+  qt/wvr/res/img/ic-arrow-right.png \
+  qt/wvr/res/img/ic-copy.png \
+  qt/wvr/res/img/ic-copy-big.png \
+  qt/wvr/res/img/ic-copy-big-white.png \
+  qt/wvr/res/img/ic-submenu-unlock.png \
+  qt/wvr/res/img/img-nav-logo.png \
+  qt/wvr/res/img/ic-arrow-white-left.png \
+  qt/wvr/res/img/ic-exit.png \
+  qt/wvr/res/img/ic-switch-liliac-on.png \
+  qt/wvr/res/img/img-nav-logo.png \
+  qt/wvr/res/img/ic-arrow-white-right.png \
+  qt/wvr/res/img/ic-expand.png \
+  qt/wvr/res/img/ic-switch-off.png \
+  qt/wvr/res/img/img-qr-test-big.png \
+  qt/wvr/res/img/ic-check-active.png \
+  qt/wvr/res/img/ic-folder.png \
+  qt/wvr/res/img/ic-switch-on.png \
+  qt/wvr/res/img/img-qr-test.png \
+  qt/wvr/res/img/ic-check-box.png \
+  qt/wvr/res/img/ic-check-box-dark-active.png \
+  qt/wvr/res/img/ic-check-box-indeterminate.png \
+  qt/wvr/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/wvr/res/img/ic-label-liliac.png \
+  qt/wvr/res/img/ic-transaction-warning.png \
+  qt/wvr/res/img/ic-transaction-mint.png \
+  qt/wvr/res/img/ic-transaction-mint-inactive.png \
+  qt/wvr/res/img/ic-check-cold-staking.png \
+  qt/wvr/res/img/ic-check-cold-staking-off.png \
+  qt/wvr/res/img/ic-check-cold-staking-enabled.png \
+  qt/wvr/res/img/dark/ic-transaction-cs-contract.png \
+  qt/wvr/res/img/dark/ic-transaction-cs-contract-inactive.png \
+  qt/wvr/res/img/img-qr.png \
+  qt/wvr/res/img/ic-check-connect-off.png \
+  qt/wvr/res/img/ic-label.png \
+  qt/wvr/res/img/ic-transaction-received.png \
+  qt/wvr/res/img/dark/ic-transaction-received.png \
+  qt/wvr/res/img/dark/ic-transaction-warning.png \
+  qt/wvr/res/img/dark/ic-transaction-mint.png \
+  qt/wvr/res/img/dark/ic-transaction-mint-inactive.png \
+  qt/wvr/res/img/ic-transaction-received-inactive.png \
+  qt/wvr/res/img/dark/ic-transaction-received-inactive.png \
+  qt/wvr/res/img/img-welcome-step1.png \
+  qt/wvr/res/img/ic-check-connect.png \
+  qt/wvr/res/img/ic-menu-hover.png \
+  qt/wvr/res/img/ic-transaction-sent.png \
+  qt/wvr/res/img/ic-transaction-sent-inactive.png \
+  qt/wvr/res/img/dark/ic-transaction-sent.png \
+  qt/wvr/res/img/dark/ic-transaction-sent-inactive.png \
+  qt/wvr/res/img/img-welcome-step2.png \
+  qt/wvr/res/img/ic-check-dark.png \
+  qt/wvr/res/img/ic-mint.png \
+  qt/wvr/res/img/ic-transaction-staked.png \
+  qt/wvr/res/img/ic-transaction-staked-inactive.png \
+  qt/wvr/res/img/dark/ic-transaction-staked.png \
+  qt/wvr/res/img/dark/ic-transaction-staked-inactive.png \
+  qt/wvr/res/img/img-welcome-step3.png \
+  qt/wvr/res/img/ic-check-liliac-on.png \
+  qt/wvr/res/img/ic-nav-address-active.png \
+  qt/wvr/res/img/ic-unlock-staking.png \
+  qt/wvr/res/img/img-welcome-step4.png \
+  qt/wvr/res/img/ic-check-locked-off.png \
+  qt/wvr/res/img/ic-nav-address-hover.png \
+  qt/wvr/res/img/ic-update-liliac.png \
+  qt/wvr/res/img/ic-arrow-drop-down-purple.png \
+  qt/wvr/res/img/ic-arrow-drop-up-purple.png \
+  qt/wvr/res/img/ic-check-liliac-indeterminate.png \
+  qt/wvr/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/wvr/res/img/ic-transaction-stake-delegated.png \
+  qt/wvr/res/img/ic-transaction-stake-delegated-inactive.png \
+  qt/wvr/res/img/ic-transaction-stake-hot.png \
+  qt/wvr/res/img/ic-transaction-stake-hot-inactive.png \
+  qt/wvr/res/img/dark/ic-transaction-stake-hot.png \
+  qt/wvr/res/img/dark/ic-transaction-stake-hot-inactive.png \
+  qt/wvr/res/img/dark/ic-transaction-stake-delegated.png \
+  qt/wvr/res/img/dark/ic-transaction-stake-delegated-inactive.png \
+  qt/wvr/res/img/ic-transaction-cs-contract.png \
+  qt/wvr/res/img/ic-transaction-cs-contract-inactive.png \
+  qt/wvr/res/img/ic-check-box-indeterminate.png \
+  qt/wvr/res/img/ani-loading-dark.gif \
+  qt/wvr/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinamountfield.cpp \
+  qt/wvr/wvrgui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/blockexplorer.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/splashscreen.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/governancepage.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/proposalframe.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/wvr/loadingdialog.cpp \
+  qt/zwvrcontroldialog.cpp \
+  qt/wvr/pwidget.cpp \
+  qt/wvr/guitransactionsutils.cpp \
+  qt/wvr/snackbar.cpp \
+  qt/wvr/navmenuwidget.cpp \
+  qt/wvr/lockunlock.cpp \
+  qt/wvr/receivedialog.cpp \
+  qt/wvr/furabstractlistitemdelegate.cpp \
+  qt/wvr/txviewholder.cpp \
+  qt/wvr/qtutils.cpp \
+  qt/wvr/expandablebutton.cpp \
+  qt/wvr/walletpassworddialog.cpp \
+  qt/wvr/topbar.cpp \
+  qt/wvr/txrow.cpp \
+  qt/wvr/addressholder.cpp \
+  qt/wvr/addressfilterproxymodel.cpp \
+  qt/wvr/dashboardwidget.cpp \
+  qt/wvr/coincontrolwvrwidget.cpp \
+  qt/wvr/addresslabelrow.cpp \
+  qt/wvr/contactdropdownrow.cpp \
+  qt/wvr/contactsdropdown.cpp \
+  qt/wvr/optionbutton.cpp \
+  qt/wvr/mninfodialog.cpp \
+  qt/wvr/coldstakingmodel.cpp \
+  qt/wvr/mnmodel.cpp \
+  qt/wvr/masternodewizarddialog.cpp \
+  qt/wvr/mnrow.cpp \
+  qt/wvr/masternodeswidget.cpp \
+  qt/wvr/myaddressrow.cpp \
+  qt/wvr/csrow.cpp \
+  qt/wvr/sendchangeaddressdialog.cpp \
+  qt/wvr/sendconfirmdialog.cpp \
+  qt/wvr/sendcustomfeedialog.cpp \
+  qt/wvr/sendchangeaddressdialog.cpp \
+  qt/wvr/sendmultirow.cpp \
+  qt/wvr/send.cpp \
+  qt/wvr/addnewaddressdialog.cpp \
+  qt/wvr/addnewcontactdialog.cpp \
+  qt/wvr/requestdialog.cpp \
+  qt/wvr/receivewidget.cpp \
+  qt/wvr/tooltipmenu.cpp \
+  qt/wvr/addresseswidget.cpp \
+  qt/wvr/defaultdialog.cpp \
+  qt/wvr/denomgenerationdialog.cpp \
+  qt/wvr/privacywidget.cpp \
+  qt/wvr/coldstakingwidget.cpp \
+  qt/wvr/settings/settingsbackupwallet.cpp \
+  qt/wvr/settings/settingsbittoolwidget.cpp \
+  qt/wvr/settings/settingsconsolewidget.cpp \
+  qt/wvr/settings/settingsdisplayoptionswidget.cpp \
+  qt/wvr/settings/settingsfaqwidget.cpp \
+  qt/wvr/settings/settingsinformationwidget.cpp \
+  qt/wvr/settings/settingsmainoptionswidget.cpp \
+  qt/wvr/settings/settingsmultisenddialog.cpp \
+  qt/wvr/settings/settingsmultisendwidget.cpp \
+  qt/wvr/settings/settingssignmessagewidgets.cpp \
+  qt/wvr/settings/settingswalletoptionswidget.cpp \
+  qt/wvr/settings/settingswalletrepairwidget.cpp \
+  qt/wvr/settings/settingswidget.cpp \
+  qt/wvr/welcomecontentwidget.cpp \
+  qt/wvr/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png \
+  qt/res/images/wvr_logo_horizontal.png \
+  qt/res/images/downArrow_dark.png \
+  qt/res/images/downArrow_small_dark.png \
+  qt/res/images/downArrow_small.png \
+  qt/res/images/upArrow_small_dark.png \
+  qt/res/images/upArrow_small.png \
+  qt/res/images/leftArrow_small_dark.png \
+  qt/res/images/rightArrow_small_dark.png \
+  qt/res/images/qtreeview_selected.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/wvr/res/css/style_dark.css \
+  qt/wvr/res/css/style_light.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/wvr-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_wvr_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# wvr-qt binary #
+qt_wvr_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_wvr_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_wvr_qt_SOURCES = qt/wvr.cpp
+if TARGET_DARWIN
+  qt_wvr_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_wvr_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_wvr_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_wvr_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_wvr_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_wvr_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_wvr_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_wvr_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/wvrstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/wvrstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/wvr.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/wvr_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name wvr_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name wvr $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_wvr_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+wvr_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_wvr_qt_OBJECTS) qt/wvr-qt$(EXEEXT) $(LIBBITCOINQT)
+
+wvr_qt : qt/wvr-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

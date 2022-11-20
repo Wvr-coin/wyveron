@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=wvr Coin
+Comment=wvr P2P Cryptocurrency
+Comment[fr]=wvr, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=wvr, eşten eşe kriptografik sanal para birimi
+Exec=wvr-qt %u
+Terminal=false
+Type=Application
+Icon=wvr128
+MimeType=x-scheme-handler/wvr;
+Categories=Office;Finance;
+StartupWMClass=wvr-qt
